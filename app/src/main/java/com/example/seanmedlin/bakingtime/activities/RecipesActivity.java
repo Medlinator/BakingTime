@@ -11,9 +11,11 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.seanmedlin.bakingtime.adapters.RecipesAdapter;
 import com.example.seanmedlin.bakingtime.R;
+import com.example.seanmedlin.bakingtime.models.Recipe;
 import com.example.seanmedlin.bakingtime.utilities.NetworkUtils;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class RecipesActivity extends AppCompatActivity {
@@ -78,6 +80,6 @@ public class RecipesActivity extends AppCompatActivity {
         new QueryTask().execute(searchUrl);
     }
 
-    private class QueryTask extends AsyncTask<URL, Void, ArrayList<Recipes>> {
+    private class QueryTask extends AsyncTask<URL, Void, ArrayList<Recipe>> {
     }
 }
