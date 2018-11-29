@@ -63,7 +63,7 @@ public class RecipesActivity extends AppCompatActivity {
         if (networkInfo != null && networkInfo.isConnected()) {
             // Make JSON request to the specified URL
             makeSearchQuery(RECIPES_URL);
-            // TODO Finish onCreate
+            // TODO (3) Finish onCreate
         }
     }
 

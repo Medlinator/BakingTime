@@ -9,5 +9,6 @@ import java.io.Serializable;
  */
 @Entity(tableName = "recipes_table")
 public class Recipe implements Serializable {
-// TODO Implement one to many relationship from recipes_table to ingredients_table and steps_table
+    // TODO (1) Create classes for Ingredients and Steps
+    // TODO (2) Implement one to many relationship from recipes_table to ingredients_table and steps_table
 }
