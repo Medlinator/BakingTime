@@ -1,55 +1,40 @@
 package com.example.seanmedlin.bakingtime.models;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
-
 import java.io.Serializable;
 
 /**
  * A {@link Step} object contains information related to a recipe step
  */
-@Entity(tableName = "steps_table", foreignKeys = @ForeignKey(entity = Recipe.class,
-                                                             parentColumns = "id",
-                                                             childColumns = "recipe_id"))
 public class Step implements Serializable {
 
     /**
      * ID of the step
      */
-    @PrimaryKey
-    @ColumnInfo(name = "id")
     private final int mId;
 
     /**
      * Short description of the step
      */
-    @ColumnInfo(name = "short_description")
     private final String mShortDescription;
 
     /**
      * Description of the step
      */
-    @ColumnInfo(name = "description")
     private final String mDescription;
 
     /**
      * Video for the step
      */
-    @ColumnInfo(name = "video_url")
     private final String mVideoUrl;
 
     /**
      * Thumbnail for the step
      */
-    @ColumnInfo(name = "thumbnail_url")
     private final String mThumbnailUrl;
 
     /**
      * ID of the recipe
      */
-    @ColumnInfo(name = "recipe_id")
     private final int mRecipeId;
 
     /**

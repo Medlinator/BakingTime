@@ -4,22 +4,42 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.seanmedlin.bakingtime.R;
+import com.example.seanmedlin.bakingtime.models.Recipe;
+
+import java.util.ArrayList;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesAdapterViewHolder> {
 
-    private String[] mDataset;
+    /**
+     * Interface for onClick
+     */
+    public interface RecipeAdapterOnClickHandler {
+        void onClick(Recipe recipe);
+    }
 
-    public RecipesAdapter() {}
+    private final RecipeAdapterOnClickHandler mOnClickHandler;
+    private ArrayList<Recipe> mRecipeData;
+
+    /**
+     * Constructor for adapter
+     *
+     * @param onClickHandler the onClickHandler for the view item
+     */
+    public RecipesAdapter(RecipeAdapterOnClickHandler onClickHandler) {
+        mOnClickHandler = onClickHandler;
+    }
 
     /**
      * Class declaration for ViewHolder. ViewHolder holds a cache of views that will be used and
      * reused for grid items.
      */
-    public class RecipesAdapterViewHolder extends RecyclerView.ViewHolder {
+    public class RecipesAdapterViewHolder extends RecyclerView.ViewHolder
+            implements OnClickListener {
 
         public TextView mTextView;
 
@@ -29,6 +49,14 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
         RecipesAdapterViewHolder(View view) {
             super(view);
             mTextView = view.findViewById(R.id.recipes_text_view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            Recipe recipe = mRecipeData.get(adapterPosition);
+            mOnClickHandler.onClick(recipe);
         }
     }
 
@@ -62,8 +90,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
      */
     @Override
     public void onBindViewHolder(RecipesAdapterViewHolder recipesAdapterViewHolder, int position) {
-        recipesAdapterViewHolder.mTextView.setText(mDataset[position]);
-
+        Recipe recipe = mRecipeData.get(position);
+        recipesAdapterViewHolder.mTextView.setText(recipe.getName());
     }
 
     /**
@@ -74,16 +102,17 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
      */
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        if (mRecipeData == null) return 0;
+        return mRecipeData.size();
     }
 
     /**
      * Method that will set new data from the web in the RecipesAdapter without creating a new one.
      *
-     * @param recipesData The new recipes data to be displayed.
+     * @param recipes The new recipes data to be displayed.
      */
-    public void setRecipesData(String[] recipesData) {
-        mDataset = recipesData;
+    public void setRecipesData(ArrayList<Recipe> recipes) {
+        mRecipeData = recipes;
         notifyDataSetChanged();
     }
 }

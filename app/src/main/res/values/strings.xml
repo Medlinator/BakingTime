@@ -1,3 +1,10 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">Baking Time</string>
+
+    <!-- Activity Names -->
+
+    <!-- Error Messages -->
+    <string name="error_message">Failed to get results. Please try again.</string>
+    <string name="no_connection">No internet connection.</string>
 </resources>
