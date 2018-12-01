@@ -30,9 +30,8 @@ public final class JsonUtils {
         final String STEP_VIDEO_URL = "videoURL";
         final String STEP_THUMBNAIL_URL = "thumbnailURL";
 
+        // ArrayList to hold all recipes
         ArrayList<Recipe> recipesArrayList = new ArrayList<>();
-        ArrayList<Ingredient> ingredientsArrayList = new ArrayList<>();
-        ArrayList<Step> stepsArrayList = new ArrayList<>();
 
         JSONArray jsonRecipesArray = new JSONArray(jsonResponseArrayStr);
 
@@ -52,6 +51,9 @@ public final class JsonUtils {
             servings = recipeObject.getInt(RECIPE_SERVINGS);
             // Get recipe image
             image = recipeObject.getString(RECIPE_IMAGE);
+
+            // ArrayList to hold all ingredients for current recipe
+            ArrayList<Ingredient> ingredientsArrayList = new ArrayList<>();
 
             // Get ingredients for recipe
             JSONArray jsonIngredientsArray = recipeObject.getJSONArray(INGREDIENTS_ARRAY);
@@ -75,6 +77,9 @@ public final class JsonUtils {
 
                 ingredientsArrayList.add(currentIngredient);
             }
+
+            // ArrayList to hold all steps for current recipe
+            ArrayList<Step> stepsArrayList = new ArrayList<>();
 
             JSONArray jsonStepsArray = recipeObject.getJSONArray(STEPS_ARRAY);
 

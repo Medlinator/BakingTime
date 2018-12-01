@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.example.seanmedlin.bakingtime.R;
 
-public class Recipe extends AppCompatActivity {
+public class IngredientsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe);
+        setContentView(R.layout.activity_ingredients);
     }
 }

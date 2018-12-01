@@ -24,7 +24,7 @@ public class Recipe implements Serializable {
     private final int mServings;
 
     /**
-     * Recipe image
+     * RecipeDetailsActivity image
      */
     private final String mImage;
 

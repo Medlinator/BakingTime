@@ -30,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipesActivity extends AppCompatActivity
-        implements RecipesAdapter.RecipeAdapterOnClickHandler {
+        implements RecipesAdapter.RecipesAdapterOnClickHandler {
 
     private final String RECIPES_URL =
             "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
@@ -104,18 +104,6 @@ public class RecipesActivity extends AppCompatActivity
         new QueryTask().execute(searchUrl);
     }
 
-    /**
-     * This method handles RecyclerView item clicks
-     *
-     * @param recipe the recipe object to be passed on
-     */
-    @Override
-    public void onClick(Recipe recipe) {
-        Intent intent = new Intent(this, Recipe.class);
-        intent.putExtra("recipe", recipe);
-        startActivity(intent);
-    }
-
     class QueryTask extends AsyncTask<URL, Void, ArrayList<Recipe>> {
 
         @Override
@@ -155,5 +143,17 @@ public class RecipesActivity extends AppCompatActivity
                 mRecyclerView.setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    /**
+     * This method handles RecyclerView item clicks
+     *
+     * @param recipe the recipe object to be passed on
+     */
+    @Override
+    public void onClick(Recipe recipe) {
+        Intent intent = new Intent(this, RecipeDetailsActivity.class);
+        intent.putExtra("recipe", recipe);
+        startActivity(intent);
     }
 }
