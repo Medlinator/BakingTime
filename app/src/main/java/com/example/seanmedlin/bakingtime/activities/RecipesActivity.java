@@ -36,9 +36,9 @@ public class RecipesActivity extends AppCompatActivity
             "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     private final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
-    @BindView(R.id.recipes_recycler_view) RecyclerView mRecyclerView;
-    @BindView(R.id.recipes_error_message_text_view) TextView mErrorMessageTextView;
-    @BindView(R.id.recipes_progress_bar) ProgressBar mProgressBar;
+    @BindView(R.id.activity_recipes_recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.activity_recipes_error_message_text_view) TextView mErrorMessageTextView;
+    @BindView(R.id.activity_recipes_progress_bar) ProgressBar mProgressBar;
 
     private RecipesAdapter mAdapter;
     private GridLayoutManager mLayoutManager;
@@ -130,14 +130,14 @@ public class RecipesActivity extends AppCompatActivity
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Recipe> recipes) {
+        protected void onPostExecute(ArrayList<Recipe> mRecipesData) {
             mProgressBar.setVisibility(View.INVISIBLE);
             mLayoutManager.smoothScrollToPosition(mRecyclerView, null, 0);
 
-            if (recipes != null) {
+            if (mRecipesData != null) {
                 mErrorMessageTextView.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.VISIBLE);
-                mAdapter.setRecipesData(recipes);
+                mAdapter.setRecipesData(mRecipesData);
             } else {
                 mErrorMessageTextView.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(View.INVISIBLE);

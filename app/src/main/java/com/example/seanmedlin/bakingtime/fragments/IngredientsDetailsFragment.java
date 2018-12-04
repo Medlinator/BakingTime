@@ -9,48 +9,36 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.seanmedlin.bakingtime.R;
-import com.example.seanmedlin.bakingtime.activities.StepDetailsActivity;
-import com.example.seanmedlin.bakingtime.adapters.RecipeOverviewAdapter;
+import com.example.seanmedlin.bakingtime.adapters.IngredientsDetailsAdapter;
 import com.example.seanmedlin.bakingtime.models.Ingredient;
-import com.example.seanmedlin.bakingtime.models.Recipe;
-import com.example.seanmedlin.bakingtime.models.Step;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecipeOverviewFragment extends Fragment
-        implements RecipeOverviewAdapter.RecipeOverviewAdapterOnClickHandler {
+public class IngredientsDetailsFragment extends Fragment {
 
     private final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
-    @BindView(R.id.recipe_overview_text_view)
-    TextView mTextView;
-    @BindView(R.id.recipe_overview_recycler_view)
+    @BindView(R.id.fragment_ingredients_details_recycler_view)
     RecyclerView mRecyclerView;
 
-    private Recipe mRecipe;
-    private ArrayList<Step> mSteps;
-    private ArrayList<Ingredient> mIngredients;
-    private RecipeOverviewAdapter mAdapter;
+    private ArrayList<Ingredient> mIngredientsData;
+    private IngredientsDetailsAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container,false);
+        View rootView = inflater.inflate(R.layout.fragment_ingredients_details, container,
+                false);
         ButterKnife.bind(this, rootView);
 
         Intent intent = getActivity().getIntent();
-        mRecipe = (Recipe) intent.getSerializableExtra("recipe");
-        mSteps = mRecipe.getSteps();
-        mIngredients = mRecipe.getIngredients();
-
-
+        mIngredientsData = (ArrayList<Ingredient>) intent.getSerializableExtra("ingredients");
 
         // Set up the RecyclerView
         mRecyclerView.setHasFixedSize(true);
@@ -60,9 +48,9 @@ public class RecipeOverviewFragment extends Fragment
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // Set up the Adapter
-        mAdapter = new RecipeOverviewAdapter(this);
+        mAdapter = new IngredientsDetailsAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setRecipeData(mSteps);
+        mAdapter.setIngredientsData(mIngredientsData);
 
         // Restore activity data on orientation change
         if (savedInstanceState != null) {
@@ -79,23 +67,5 @@ public class RecipeOverviewFragment extends Fragment
         super.onSaveInstanceState(outState);
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT,
                 mRecyclerView.getLayoutManager().onSaveInstanceState());
-    }
-
-    /**
-     * This method handles RecyclerView item clicks
-     *
-     * @param step the step object to be passed on
-     */
-    @Override
-    public void onClick(Step step) {
-        Intent intent = new Intent(getContext(), StepDetailsActivity.class);
-        intent.putExtra("step", step);
-        startActivity(intent);
-    }
-
-    public void startIngredientsFragment(ArrayList<Ingredient> ingredients) {
-        Intent intent = new Intent(getContext(), IngredientsFragment.class);
-        intent.putExtra("ingredients", ingredients);
-        startActivity(intent);
     }
 }

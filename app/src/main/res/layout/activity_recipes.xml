@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:padding="16dp"
+    android:background="@color/background_color">
 
     <!-- RecyclerView for recipe list items -->
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/recipes_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_recipes_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:scrollbars="none" />
 
     <!-- TextView displaying error message if JSON request fails -->
     <TextView
-        android:id="@+id/recipes_error_message_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:id="@+id/activity_recipes_error_message_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="@string/error_message"
         android:textAppearance="?android:textAppearanceMedium"
         android:visibility="invisible" />
 
     <!-- Loading indicator for user feedback between queries -->
     <ProgressBar
-        android:id="@+id/recipes_progress_bar"
+        android:id="@+id/activity_recipes_progress_bar"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         android:scaleX="0.10"
         android:scaleY="0.10" />
 
-</LinearLayout>
+</RelativeLayout>

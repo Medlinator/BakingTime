@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.seanmedlin.bakingtime.R;
 import com.example.seanmedlin.bakingtime.models.Recipe;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,14 +43,16 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
     public class RecipesAdapterViewHolder extends RecyclerView.ViewHolder
             implements OnClickListener {
 
-        public TextView mTextView;
+        private TextView mTextView;
+        private ImageView mImageView;
 
         /**
          * Constructor for our ViewHolder.
          */
         RecipesAdapterViewHolder(View view) {
             super(view);
-            mTextView = view.findViewById(R.id.recipe_text_view);
+            mTextView = view.findViewById(R.id.recipe_list_item_text_view);
+            mImageView = view.findViewById(R.id.recipe_list_item_image_view);
             view.setOnClickListener(this);
         }
 
@@ -72,7 +76,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
     @Override
     public RecipesAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        int layoutIdForGridItem = R.layout.recipe_list_item;
+        int layoutIdForGridItem = R.layout.list_item_recipe;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
@@ -86,12 +90,17 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
      *
      * @param recipesAdapterViewHolder The ViewHolder which should be updated to represent the
      *                                 contents of the item at the given position in the data set.
-     * @param position The position of the item within the adapter's data set.
+     * @param position                 The position of the item within the adapter's data set.
      */
     @Override
     public void onBindViewHolder(RecipesAdapterViewHolder recipesAdapterViewHolder, int position) {
         Recipe recipe = mRecipeData.get(position);
         recipesAdapterViewHolder.mTextView.setText(recipe.getName());
+        if (!recipe.getImage().isEmpty()) {
+            Picasso.get().load(recipe.getImage()).into(recipesAdapterViewHolder.mImageView);
+        } else {
+            recipesAdapterViewHolder.mImageView.setImageResource(R.drawable.no_image_found);
+        }
     }
 
     /**

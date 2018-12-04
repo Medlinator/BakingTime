@@ -6,12 +6,16 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="horizontal"
-    tools:context=".activities.IngredientsActivity">
+    tools:context=".activities.RecipeDetailsActivity">
 
     <fragment
-        android:id="@+id/recipe_overview_fragment"
-        android:name="com.example.seanmedlin.bakingtime.fragments.IngredientsFragment"
+        android:id="@+id/activity_recipe_details_fragment"
+        android:name="com.example.seanmedlin.bakingtime.fragments.RecipeDetailsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 </LinearLayout>
+
+
+
+

@@ -12,17 +12,17 @@ import com.example.seanmedlin.bakingtime.models.Step;
 
 import java.util.ArrayList;
 
-public class RecipeOverviewAdapter
-        extends RecyclerView.Adapter<RecipeOverviewAdapter.RecipeOverviewAdapterViewHolder>  {
+public class RecipeDetailsAdapter
+        extends RecyclerView.Adapter<RecipeDetailsAdapter.RecipeDetailsAdapterViewHolder> {
 
     /**
      * Interface for onClick
      */
-    public interface RecipeOverviewAdapterOnClickHandler {
+    public interface RecipeDetailsAdapterOnClickHandler {
         void onClick(Step step);
     }
 
-    private final RecipeOverviewAdapterOnClickHandler mOnClickHandler;
+    private final RecipeDetailsAdapterOnClickHandler mOnClickHandler;
     private ArrayList<Step> mStepData;
 
     /**
@@ -30,7 +30,7 @@ public class RecipeOverviewAdapter
      *
      * @param onClickHandler the onClickHandler for the view item
      */
-    public RecipeOverviewAdapter(RecipeOverviewAdapterOnClickHandler onClickHandler) {
+    public RecipeDetailsAdapter(RecipeDetailsAdapterOnClickHandler onClickHandler) {
         mOnClickHandler = onClickHandler;
     }
 
@@ -38,17 +38,17 @@ public class RecipeOverviewAdapter
      * Class declaration for ViewHolder. ViewHolder holds a cache of views that will be used and
      * reused for grid items.
      */
-    public class RecipeOverviewAdapterViewHolder extends RecyclerView.ViewHolder
+    public class RecipeDetailsAdapterViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         public TextView mTextView;
 
         /**
-         * Constructor for our ViewHolder.
+         * Constructor for the ViewHolder
          */
-        RecipeOverviewAdapterViewHolder(View view) {
+        RecipeDetailsAdapterViewHolder(View view) {
             super(view);
-            mTextView = view.findViewById(R.id.step_text_view);
+            mTextView = view.findViewById(R.id.step_list_item_text_view);
             view.setOnClickListener(this);
         }
 
@@ -64,35 +64,34 @@ public class RecipeOverviewAdapter
      * This gets called when each new ViewHolder is created. This happens when the RecyclerView
      * is laid out. Enough ViewHolders will be created to fill the screen and allow for scrolling.
      *
-     * @param viewGroup The ViewGroup that these ViewHolders are contained within.
+     * @param viewGroup The ViewGroup that the ViewHolders are contained within
      * @param viewType  If your RecyclerView has more than one type of item you can use this
-     *                  viewType integer to provide a different layout.
+     *                  viewType integer to provide a different layout
      * @return A new RecipesAdapterViewHolder that holds the View for each list item
      */
     @Override
-    public RecipeOverviewAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public RecipeDetailsAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        int layoutIdForGridItem = R.layout.step_list_item;
+        int layoutIdForGridItem = R.layout.list_item_step;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForGridItem, viewGroup, shouldAttachToParentImmediately);
-        return new RecipeOverviewAdapterViewHolder(view);
+        return new RecipeDetailsAdapterViewHolder(view);
     }
 
     /**
-     * OnBindViewHolder is called by the RecyclerView to display the data at the specified
-     * position.
+     * OnBindViewHolder is called by the RecyclerView to display the data at the specified position
      *
-     * @param recipeOverviewAdapterViewHolder The ViewHolder which should be updated to represent the
-     *                                 contents of the item at the given position in the data set.
-     * @param position The position of the item within the adapter's data set.
+     * @param recipeDetailsAdapterViewHolder The ViewHolder which should be updated to represent the
+     *                                       contents of the item at the given position in the data set.
+     * @param position                       The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(RecipeOverviewAdapterViewHolder recipeOverviewAdapterViewHolder,
+    public void onBindViewHolder(RecipeDetailsAdapterViewHolder recipeDetailsAdapterViewHolder,
                                  int position) {
         Step step = mStepData.get(position);
-        recipeOverviewAdapterViewHolder.mTextView.setText(step.getShortDescription());
+        recipeDetailsAdapterViewHolder.mTextView.setText(step.getShortDescription());
     }
 
     /**
@@ -108,12 +107,12 @@ public class RecipeOverviewAdapter
     }
 
     /**
-     * Method that will set new data in the RecipeOverviewAdapter without creating a new one.
+     * Method that will set new data in the RecipeDetailsAdapter without creating a new one.
      *
-     * @param steps The new steps data to be displayed.
+     * @param stepsData The new steps data to be displayed.
      */
-    public void setRecipeData(ArrayList<Step> steps) {
-        mStepData = steps;
+    public void setRecipeData(ArrayList<Step> stepsData) {
+        mStepData = stepsData;
         notifyDataSetChanged();
     }
 }

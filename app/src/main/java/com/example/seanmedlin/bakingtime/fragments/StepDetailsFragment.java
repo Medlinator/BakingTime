@@ -18,11 +18,11 @@ import butterknife.ButterKnife;
 
 public class StepDetailsFragment extends Fragment {
 
-    @BindView(R.id.step_details_description_text_view)
+    @BindView(R.id.fragment_step_details_description_text_view)
     @Nullable
     TextView mTextView;
-    @Nullable
-    @BindView(R.id.step_details_next_button) Button mButton;
+
+    @BindView(R.id.fragment_step_details_next_button) Button mButton;
 
     private Step mStep;
 
