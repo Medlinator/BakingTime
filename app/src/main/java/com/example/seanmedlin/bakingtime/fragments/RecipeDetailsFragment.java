@@ -29,9 +29,9 @@ public class RecipeDetailsFragment extends Fragment
 
     private final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
-    @BindView(R.id.fragment_recipe_details_ingredients_text_view)
+    @BindView(R.id.step_list_item_ingredients_text_view)
     TextView mTextView;
-    @BindView(R.id.fragment_recipe_details_recycler_view)
+    @BindView(R.id.fragment_details_recipe_recycler_view)
     RecyclerView mRecyclerView;
 
     private Recipe mRecipe;
@@ -43,7 +43,7 @@ public class RecipeDetailsFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_recipe_details, container,
+        View rootView = inflater.inflate(R.layout.fragment_details_recipe, container,
                 false);
         ButterKnife.bind(this, rootView);
 

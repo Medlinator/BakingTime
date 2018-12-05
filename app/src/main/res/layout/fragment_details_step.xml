@@ -11,15 +11,15 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:text="Video Player"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/fragment_step_details_description_text_view"
+        android:id="@+id/fragment_details_step_description_text_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:text="Step Description"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/fragment_step_details_next_button"

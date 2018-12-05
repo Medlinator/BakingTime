@@ -33,7 +33,7 @@ public class IngredientsDetailsAdapter
          */
         IngredientsDetailsAdapterViewHolder(View view) {
             super(view);
-            mTextView = view.findViewById(R.id.ingredient_list_item_text_view);
+            mTextView = view.findViewById(R.id.list_item_ingredient_ingredient_text_view);
         }
     }
 

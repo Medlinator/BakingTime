@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 
 public class StepDetailsFragment extends Fragment {
 
-    @BindView(R.id.fragment_step_details_description_text_view)
+    @BindView(R.id.fragment_details_step_description_text_view)
     @Nullable
     TextView mTextView;
 
@@ -30,7 +30,7 @@ public class StepDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_step_details, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_details_step, container, false);
         ButterKnife.bind(this, rootView);
 
         Intent intent = getActivity().getIntent();

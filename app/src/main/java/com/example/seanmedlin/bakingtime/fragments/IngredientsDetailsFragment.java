@@ -23,7 +23,7 @@ public class IngredientsDetailsFragment extends Fragment {
 
     private final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
-    @BindView(R.id.fragment_ingredients_details_recycler_view)
+    @BindView(R.id.fragment_details_ingredients_recycler_view)
     RecyclerView mRecyclerView;
 
     private ArrayList<Ingredient> mIngredientsData;
@@ -33,7 +33,7 @@ public class IngredientsDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_ingredients_details, container,
+        View rootView = inflater.inflate(R.layout.fragment_details_ingredients, container,
                 false);
         ButterKnife.bind(this, rootView);
 

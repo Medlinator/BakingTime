@@ -51,8 +51,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesA
          */
         RecipesAdapterViewHolder(View view) {
             super(view);
-            mTextView = view.findViewById(R.id.recipe_list_item_text_view);
-            mImageView = view.findViewById(R.id.recipe_list_item_image_view);
+            mTextView = view.findViewById(R.id.list_item_recipe_name_text_view);
+            mImageView = view.findViewById(R.id.list_item_recipe_thumbnail_image_view);
             view.setOnClickListener(this);
         }
 

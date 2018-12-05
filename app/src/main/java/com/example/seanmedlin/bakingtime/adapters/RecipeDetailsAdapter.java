@@ -48,7 +48,7 @@ public class RecipeDetailsAdapter
          */
         RecipeDetailsAdapterViewHolder(View view) {
             super(view);
-            mTextView = view.findViewById(R.id.step_list_item_text_view);
+            mTextView = view.findViewById(R.id.list_item_step_short_description_text_view);
             view.setOnClickListener(this);
         }
 

@@ -9,7 +9,7 @@
     tools:context=".activities.StepDetailsActivity">
 
     <fragment
-        android:id="@+id/activity_step_details_fragment"
+        android:id="@+id/activity_details_step_fragment"
         android:name="com.example.seanmedlin.bakingtime.fragments.StepDetailsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
