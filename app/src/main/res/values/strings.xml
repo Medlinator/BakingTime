@@ -1,4 +1,5 @@
 <resources>
+    <!-- TODO Clean up strings.xml -->
     <!-- App Name -->
     <string name="app_name">Baking Time</string>
 
@@ -7,8 +8,5 @@
     <!-- Error Messages -->
     <string name="error_message">Failed to get results. Please try again.</string>
     <string name="no_connection">No internet connection.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ingredients_label">Ingredients</string>
 </resources>

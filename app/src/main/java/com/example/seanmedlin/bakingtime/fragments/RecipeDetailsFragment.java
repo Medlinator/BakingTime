@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.example.seanmedlin.bakingtime.R;
 import com.example.seanmedlin.bakingtime.activities.IngredientsDetailsActivity;
@@ -29,8 +29,8 @@ public class RecipeDetailsFragment extends Fragment
 
     private final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
-    @BindView(R.id.step_list_item_ingredients_text_view)
-    TextView mTextView;
+    @BindView(R.id.fragment_details_recipe_ingredients_linear_layout)
+    LinearLayout mLinearLayout;
     @BindView(R.id.fragment_details_recipe_recycler_view)
     RecyclerView mRecyclerView;
 
@@ -53,7 +53,7 @@ public class RecipeDetailsFragment extends Fragment
         mIngredients = mRecipe.getIngredients();
 
         // Set Click Listener on ingredients Text View
-        mTextView.setOnClickListener(new View.OnClickListener() {
+        mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startIngredientsActivity(mIngredients);

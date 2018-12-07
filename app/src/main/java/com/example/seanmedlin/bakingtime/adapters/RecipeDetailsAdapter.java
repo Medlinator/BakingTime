@@ -12,6 +12,9 @@ import com.example.seanmedlin.bakingtime.models.Step;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RecipeDetailsAdapter
         extends RecyclerView.Adapter<RecipeDetailsAdapter.RecipeDetailsAdapterViewHolder> {
 
@@ -41,14 +44,18 @@ public class RecipeDetailsAdapter
     public class RecipeDetailsAdapterViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
-        public TextView mTextView;
+        @BindView
+       (R.id.list_item_step_title_text_view)
+        TextView mTitleTextView;
+        @BindView(R.id.list_item_step_short_description_text_view)
+        TextView mShortDescriptionTextView;
 
         /**
          * Constructor for the ViewHolder
          */
         RecipeDetailsAdapterViewHolder(View view) {
             super(view);
-            mTextView = view.findViewById(R.id.list_item_step_short_description_text_view);
+            ButterKnife.bind(this, view);
             view.setOnClickListener(this);
         }
 
@@ -91,7 +98,8 @@ public class RecipeDetailsAdapter
     public void onBindViewHolder(RecipeDetailsAdapterViewHolder recipeDetailsAdapterViewHolder,
                                  int position) {
         Step step = mStepData.get(position);
-        recipeDetailsAdapterViewHolder.mTextView.setText(step.getShortDescription());
+        recipeDetailsAdapterViewHolder.mTitleTextView.setText("Step " + (position + 1));
+        recipeDetailsAdapterViewHolder.mShortDescriptionTextView.setText(step.getShortDescription());
     }
 
     /**
