@@ -98,7 +98,7 @@ public class RecipeDetailsAdapter
     public void onBindViewHolder(RecipeDetailsAdapterViewHolder recipeDetailsAdapterViewHolder,
                                  int position) {
         Step step = mStepData.get(position);
-        recipeDetailsAdapterViewHolder.mTitleTextView.setText("Step " + (position + 1));
+        recipeDetailsAdapterViewHolder.mTitleTextView.setText("Step " + (position));
         recipeDetailsAdapterViewHolder.mShortDescriptionTextView.setText(step.getShortDescription());
     }
 

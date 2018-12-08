@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.seanmedlin.bakingtime.R;
 import com.example.seanmedlin.bakingtime.adapters.IngredientsDetailsAdapter;
 import com.example.seanmedlin.bakingtime.models.Ingredient;
+import com.example.seanmedlin.bakingtime.models.Recipe;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class IngredientsDetailsFragment extends Fragment {
     @BindView(R.id.fragment_details_ingredients_recycler_view)
     RecyclerView mRecyclerView;
 
+    private Recipe mRecipe;
     private ArrayList<Ingredient> mIngredientsData;
     private IngredientsDetailsAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -38,13 +41,16 @@ public class IngredientsDetailsFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         Intent intent = getActivity().getIntent();
-        mIngredientsData = (ArrayList<Ingredient>) intent.getSerializableExtra("ingredients");
+        mRecipe = (Recipe) intent.getSerializableExtra("recipe");
+        mIngredientsData = mRecipe.getIngredients();
 
         // Set up the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // Set up the LayoutManager
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        final int COLUMNS =
+                getResources().getInteger(R.integer.recipes_grid_layout_manager_columns);
+        mLayoutManager = new GridLayoutManager(getActivity(), COLUMNS);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // Set up the Adapter

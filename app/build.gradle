@@ -44,6 +44,12 @@ dependencies {
     // Picasso component
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // ExoPlayer component
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.7.3'
+
     // jUnit component
     testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

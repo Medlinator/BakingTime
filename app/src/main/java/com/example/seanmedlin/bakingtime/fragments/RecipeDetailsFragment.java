@@ -1,9 +1,12 @@
 package com.example.seanmedlin.bakingtime.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +16,7 @@ import android.widget.LinearLayout;
 
 import com.example.seanmedlin.bakingtime.R;
 import com.example.seanmedlin.bakingtime.activities.IngredientsDetailsActivity;
+import com.example.seanmedlin.bakingtime.activities.RecipeDetailsActivity;
 import com.example.seanmedlin.bakingtime.activities.StepDetailsActivity;
 import com.example.seanmedlin.bakingtime.adapters.RecipeDetailsAdapter;
 import com.example.seanmedlin.bakingtime.models.Ingredient;
@@ -34,6 +38,7 @@ public class RecipeDetailsFragment extends Fragment
     @BindView(R.id.fragment_details_recipe_recycler_view)
     RecyclerView mRecyclerView;
 
+    private FragmentActivity mActivity;
     private Recipe mRecipe;
     private ArrayList<Step> mStepsData;
     private ArrayList<Ingredient> mIngredients;
@@ -47,7 +52,8 @@ public class RecipeDetailsFragment extends Fragment
                 false);
         ButterKnife.bind(this, rootView);
 
-        Intent intent = getActivity().getIntent();
+        mActivity = getActivity();
+        Intent intent = mActivity.getIntent();
         mRecipe = (Recipe) intent.getSerializableExtra("recipe");
         mStepsData = mRecipe.getSteps();
         mIngredients = mRecipe.getIngredients();
@@ -56,7 +62,11 @@ public class RecipeDetailsFragment extends Fragment
         mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startIngredientsActivity(mIngredients);
+                if (R.integer.recipes_grid_layout_manager_columns == 1) {
+                    startIngredientsActivity(mIngredients);
+                } else {
+                    
+                }
             }
         });
 
@@ -98,10 +108,10 @@ public class RecipeDetailsFragment extends Fragment
     public void onClick(Step step) {
         Intent intent = new Intent(getContext(), StepDetailsActivity.class);
         intent.putExtra("step", step);
+        intent.putExtra("steps", mStepsData);
         startActivity(intent);
     }
 
-    // TODO Hook up this functionality
     public void startIngredientsActivity(ArrayList<Ingredient> ingredients) {
         Intent intent = new Intent(getContext(), IngredientsDetailsActivity.class);
         intent.putExtra("ingredients", ingredients);

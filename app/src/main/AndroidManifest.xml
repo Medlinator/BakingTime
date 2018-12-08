@@ -17,13 +17,29 @@
         <activity android:name=".activities.RecipesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.RecipeDetailsActivity" />
-        <activity android:name=".activities.StepDetailsActivity" />
-        <activity android:name=".activities.IngredientsDetailsActivity" />
+        <activity
+            android:name=".activities.RecipeDetailsActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.RecipesActivity" />
+        </activity>
+        <activity android:name=".activities.StepDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.RecipeDetailsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.IngredientsDetailsActivity"
+            android:parentActivityName=".activities.RecipeDetailsActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.RecipeDetailsActivity" />
+        </activity>
     </application>
 
 </manifest>

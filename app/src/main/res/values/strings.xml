@@ -9,4 +9,9 @@
     <string name="error_message">Failed to get results. Please try again.</string>
     <string name="no_connection">No internet connection.</string>
     <string name="ingredients_label">Ingredients</string>
+    <string name="fragment_step_details_back_button">Back</string>
+    <string name="fragment_step_details_next_button">Next</string>
+    <string name="video_label">Video</string>
+    <string name="step_instructions_label">Step Instructions</string>
+    <string name="ingredient_label">Step 1</string>
 </resources>
