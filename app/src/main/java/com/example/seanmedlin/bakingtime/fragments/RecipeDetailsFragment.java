@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -59,15 +60,8 @@ public class RecipeDetailsFragment extends Fragment
         mIngredients = mRecipe.getIngredients();
 
         // Set Click Listener on ingredients Text View
-        mLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (R.integer.recipes_grid_layout_manager_columns == 1) {
-                    startIngredientsActivity(mIngredients);
-                } else {
-                    
-                }
-            }
+        mLinearLayout.setOnClickListener(v -> {
+            startIngredientsActivity(mIngredients);
         });
 
         // Set up the RecyclerView
@@ -106,10 +100,20 @@ public class RecipeDetailsFragment extends Fragment
      */
     @Override
     public void onClick(Step step) {
-        Intent intent = new Intent(getContext(), StepDetailsActivity.class);
-        intent.putExtra("step", step);
-        intent.putExtra("steps", mStepsData);
-        startActivity(intent);
+        if (getResources().getBoolean(R.bool.twoPane)) {
+            StepDetailsFragment fragment = new StepDetailsFragment();
+            Bundle arguments = new Bundle();
+            arguments.putSerializable("step", step);
+            fragment.setArguments(arguments);
+            final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.master_list_frame_layout, fragment, "StepDetailsFragmentTag");
+            ft.commit();
+        } else {
+            Intent intent = new Intent(getContext(), StepDetailsActivity.class);
+            intent.putExtra("step", step);
+            intent.putExtra("steps", mStepsData);
+            startActivity(intent);
+        }
     }
 
     public void startIngredientsActivity(ArrayList<Ingredient> ingredients) {

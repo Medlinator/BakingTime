@@ -34,6 +34,7 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -41,6 +42,11 @@ import butterknife.ButterKnife;
 
 public class StepDetailsFragment extends Fragment {
 
+    private final static String TAG = StepDetailsFragment.class.getSimpleName();
+
+    @BindView(R.id.fragment_details_step_no_video_text_view)
+    @Nullable
+    TextView mNoVideoTextView;
     @BindView(R.id.video_view)
     PlayerView playerView;
     @BindView(R.id.fragment_details_step_description_text_view)
@@ -55,6 +61,7 @@ public class StepDetailsFragment extends Fragment {
 
 
     private SimpleExoPlayer player;
+    private Recipe mRecipe;
     private ArrayList<Step> mSteps;
     private Step mStep;
     private int mCurrentStepId;
@@ -65,6 +72,7 @@ public class StepDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.v(TAG, "OnCreateView");
 
         View rootView = inflater.inflate(
                 R.layout.fragment_details_step,
@@ -74,16 +82,21 @@ public class StepDetailsFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         Intent intent = getActivity().getIntent();
-        mSteps = (ArrayList<Step>) intent.getSerializableExtra("steps");
-        mStep = (Step) intent.getSerializableExtra("step");
-        mCurrentStepId = mStep.getId();
-
+        if (getResources().getBoolean(R.bool.twoPane)) {
+            Bundle arguments = getArguments();
+            mStep = (Step) arguments.getSerializable("step");
+        } else {
+            mSteps = (ArrayList<Step>) intent.getSerializableExtra("steps");
+            mStep = (Step) intent.getSerializableExtra("step");
+            mCurrentStepId = mStep.getId();
+        }
 
         if (mTextView != null) {
             mTextView.setText(mStep.getDescription());
         }
 
         if (savedInstanceState != null) {
+            Log.v(TAG, "pullSavedInstanceData");
             mPlaybackPosition = savedInstanceState.getLong("mPlaybackPosition");
             mCurrentWindow = savedInstanceState.getInt("mCurrentWindow");
             mPlayWhenReady = savedInstanceState.getBoolean("mPlayWhenReady");
@@ -105,11 +118,13 @@ public class StepDetailsFragment extends Fragment {
         }
 
         // Set Back button visibility to GONE if id of step is 0
-        if (mCurrentStepId == mSteps.size() - 1 && mNextButton != null) {
-            mNextButton.setVisibility(View.GONE);
-        }
+
+
 
         if (mNextButton != null) {
+            if (mCurrentStepId == mSteps.size() - 1 && mNextButton != null) {
+                mNextButton.setVisibility(View.GONE);
+            }
             mNextButton.setOnClickListener(v -> {
                 Step step = mSteps.get((mCurrentStepId + 1));
                 Intent setStepIntent = new Intent(getContext(), StepDetailsActivity.class);
@@ -124,12 +139,14 @@ public class StepDetailsFragment extends Fragment {
 
     @Override
     public void onStart() {
+        Log.v(TAG, "OnStart");
         super.onStart();
         initializePlayer();
     }
 
     @Override
     public void onResume() {
+        Log.v(TAG, "OnResume");
         super.onResume();
         if (player == null) {
             initializePlayer();
@@ -138,21 +155,18 @@ public class StepDetailsFragment extends Fragment {
 
     @Override
     public void onPause() {
+        Log.v(TAG, "OnPause");
         super.onPause();
-        if (Util.SDK_INT <= 23) {
-            releasePlayer();
-        }
+        releasePlayer();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (Util.SDK_INT > 23) {
-            releasePlayer();
-        }
     }
 
     private void initializePlayer() {
+        Log.v(TAG, "initializePlayer");
         if (player == null) {
             Activity activity = getActivity();
             player = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(activity),
@@ -161,18 +175,18 @@ public class StepDetailsFragment extends Fragment {
             player.setPlayWhenReady(mPlayWhenReady);
             player.seekTo(mCurrentWindow, mPlaybackPosition);
         }
-        if (!mStep.getVideoUrl().isEmpty()) {
+
+        if (mStep.getVideoUrl().isEmpty()) {
+            playerView.setVisibility(View.GONE);
+            mNoVideoTextView.setVisibility(View.VISIBLE);
+        } else {
             MediaSource mediaSource = buildMediaSource(Uri.parse(mStep.getVideoUrl()));
             player.prepare(mediaSource, false, false);
-        } else {
-            MediaSource mediaSource = buildMediaSource(Uri.parse("https://www.youtube.com/watch?v=05DqIGS_koU"));
-            player.prepare(mediaSource, false, false);
-
         }
-
     }
 
     private void releasePlayer() {
+        Log.v(TAG, "releasePlayer");
         if (player != null) {
             mPlaybackPosition = player.getCurrentPosition();
             mCurrentWindow = player.getCurrentWindowIndex();
@@ -189,12 +203,10 @@ public class StepDetailsFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        Log.v(TAG, "onSaveInstanceState");
         super.onSaveInstanceState(outState);
         outState.putLong("mPlaybackPosition", mPlaybackPosition);
-        Log.e("TAG", String.valueOf(mPlaybackPosition));
         outState.putInt("mCurrentWindow", mCurrentWindow);
-        Log.e("TAG", String.valueOf(mCurrentWindow));
         outState.putBoolean("mPlayWhenReady", mPlayWhenReady);
-        Log.e("TAG", String.valueOf(mPlayWhenReady));
     }
 }

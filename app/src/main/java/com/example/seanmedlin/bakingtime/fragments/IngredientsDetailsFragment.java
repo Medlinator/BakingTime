@@ -41,8 +41,12 @@ public class IngredientsDetailsFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         Intent intent = getActivity().getIntent();
-        mRecipe = (Recipe) intent.getSerializableExtra("recipe");
-        mIngredientsData = mRecipe.getIngredients();
+        if (getResources().getBoolean(R.bool.twoPane)) {
+            mRecipe = (Recipe) intent.getSerializableExtra("recipe");
+            mIngredientsData = mRecipe.getIngredients();
+        } else {
+            mIngredientsData = (ArrayList<Ingredient>) intent.getSerializableExtra("ingredients");
+        }
 
         // Set up the RecyclerView
         mRecyclerView.setHasFixedSize(true);

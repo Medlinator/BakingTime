@@ -10,4 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <TextView
+        android:id="@+id/fragment_details_step_no_video_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_video_found"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:visibility="invisible" />
+
 </FrameLayout>

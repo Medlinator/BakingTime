@@ -13,7 +13,6 @@ import com.example.seanmedlin.bakingtime.models.Recipe;
 public class RecipeDetailsActivity extends AppCompatActivity {
 
     private Recipe mRecipe;
-    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +22,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mRecipe = (Recipe) intent.getSerializableExtra("recipe");
 
-        if (findViewById(R.id.master_list_frame_layout) != null) {
-            mTwoPane = true;
+        if (getResources().getBoolean(R.bool.twoPane)) {
 
             if(savedInstanceState == null) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -36,7 +34,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                         .commit();
             }
         } else {
-            mTwoPane = false;
         }
+        // TODO Make ingredientsfragment show in master list
+        //
     }
 }
