@@ -45,7 +45,7 @@ public class RecipeDetailsAdapter
             implements View.OnClickListener {
 
         @BindView
-       (R.id.list_item_step_title_text_view)
+       (R.id.list_item_ingredient_title_text_view)
         TextView mTitleTextView;
         @BindView(R.id.list_item_step_short_description_text_view)
         TextView mShortDescriptionTextView;

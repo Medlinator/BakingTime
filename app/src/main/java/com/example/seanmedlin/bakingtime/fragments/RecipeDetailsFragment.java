@@ -105,7 +105,8 @@ public class RecipeDetailsFragment extends Fragment
             Bundle arguments = new Bundle();
             arguments.putSerializable("step", step);
             fragment.setArguments(arguments);
-            final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            final FragmentTransaction ft = getActivity().getSupportFragmentManager()
+                    .beginTransaction();
             ft.replace(R.id.master_list_frame_layout, fragment, "StepDetailsFragmentTag");
             ft.commit();
         } else {
@@ -117,8 +118,19 @@ public class RecipeDetailsFragment extends Fragment
     }
 
     public void startIngredientsActivity(ArrayList<Ingredient> ingredients) {
-        Intent intent = new Intent(getContext(), IngredientsDetailsActivity.class);
-        intent.putExtra("ingredients", ingredients);
-        startActivity(intent);
+        if (getResources().getBoolean(R.bool.twoPane)) {
+            IngredientsDetailsFragment fragment = new IngredientsDetailsFragment();
+            Bundle arguments = new Bundle();
+            arguments.putSerializable("ingredients", ingredients);
+            fragment.setArguments(arguments);
+            final FragmentTransaction ft = getActivity().getSupportFragmentManager()
+                    .beginTransaction();
+            ft.replace(R.id.master_list_frame_layout, fragment, "IngredientsDetailsFragmentTag");
+            ft.commit();
+        } else {
+            Intent intent = new Intent(getContext(), IngredientsDetailsActivity.class);
+            intent.putExtra("ingredients", ingredients);
+            startActivity(intent);
+        }
     }
 }

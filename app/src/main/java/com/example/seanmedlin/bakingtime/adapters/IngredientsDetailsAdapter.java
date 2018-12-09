@@ -12,6 +12,9 @@ import com.example.seanmedlin.bakingtime.models.Ingredient;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class IngredientsDetailsAdapter
         extends RecyclerView.Adapter<IngredientsDetailsAdapter.IngredientsDetailsAdapterViewHolder> {
@@ -26,14 +29,17 @@ public class IngredientsDetailsAdapter
 
     public class IngredientsDetailsAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView mTextView;
+        @BindView(R.id.list_item_ingredient_title_text_view)
+        TextView mTitleTextView;
+        @BindView(R.id.list_item_ingredient_text_view)
+        TextView mTextView;
 
         /**
          * Constructor for the ViewHolder
          */
         IngredientsDetailsAdapterViewHolder(View view) {
             super(view);
-            mTextView = view.findViewById(R.id.list_item_ingredient_ingredient_text_view);
+            ButterKnife.bind(this, view);
         }
     }
 
@@ -70,6 +76,7 @@ public class IngredientsDetailsAdapter
     public void onBindViewHolder(
             IngredientsDetailsAdapterViewHolder ingredientsDetailsAdapterViewHolder, int position) {
         Ingredient ingredient = mIngredientsData.get(position);
+        ingredientsDetailsAdapterViewHolder.mTitleTextView.setText("Ingredient " + (position + 1));
         ingredientsDetailsAdapterViewHolder.mTextView.setText(ingredient.getIngredient());
     }
 

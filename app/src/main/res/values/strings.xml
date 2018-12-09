@@ -15,4 +15,6 @@
     <string name="step_instructions_label">Step Instructions</string>
     <string name="ingredient_label">Step 1</string>
     <string name="no_video_found">No Video Found</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
