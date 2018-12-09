@@ -55,7 +55,6 @@ public class StepDetailsFragment extends Fragment {
 
 
     private SimpleExoPlayer player;
-    private Recipe mRecipe;
     private ArrayList<Step> mSteps;
     private Step mStep;
     private int mCurrentStepId;
@@ -74,10 +73,9 @@ public class StepDetailsFragment extends Fragment {
 
         ButterKnife.bind(this, rootView);
 
-        Intent getStepIntent = getActivity().getIntent();
-        mRecipe = (Recipe) getStepIntent.getSerializableExtra("recipe");
-        mSteps = mRecipe.getSteps();
-        mStep = (Step) getStepIntent.getSerializableExtra("step");
+        Intent intent = getActivity().getIntent();
+        mSteps = (ArrayList<Step>) intent.getSerializableExtra("steps");
+        mStep = (Step) intent.getSerializableExtra("step");
         mCurrentStepId = mStep.getId();
 
 
