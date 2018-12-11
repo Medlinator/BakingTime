@@ -33,9 +33,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                         .add(R.id.master_list_frame_layout, ingredientsDetailsFragment)
                         .commit();
             }
-        } else {
         }
-        // TODO Make ingredientsfragment show in master list
-        //
     }
 }
